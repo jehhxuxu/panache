@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:panache_core/panache_core.dart';
 
-import '../../screens/editor/controls/color_selector.dart';
 import '../../screens/editor/controls/brightness_control.dart';
+import '../../screens/editor/controls/color_selector.dart';
 
 class NewThemePanel extends StatelessWidget {
   final ColorSwatch newThemePrimary;
@@ -37,16 +36,13 @@ class NewThemePanel extends StatelessWidget {
     final isMobileInLandscape = !inPortrait && !isLargeLayout;
 
     final newThemeLabel = Padding(
-      padding: EdgeInsets.only(
-          bottom: isMobileInLandscape ? 0 : 16,
-          right: isMobileInLandscape ? 16 : 0),
-      child: Text('New theme', style: textTheme.title),
+      padding: EdgeInsets.only(bottom: isMobileInLandscape ? 0 : 16, right: isMobileInLandscape ? 16 : 0),
+      child: Text('New theme', style: textTheme.headline6),
     );
     final btCreate = Padding(
       padding: EdgeInsets.only(top: isMobileInLandscape ? 2 : 16.0),
-      child: RaisedButton.icon(
-        shape: StadiumBorder(),
-        color: newThemePrimary,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(primary: newThemePrimary, shape: StadiumBorder()),
         icon: Icon(Icons.color_lens, color: newThemePrimary[100]),
         label: Text('Create', style: TextStyle(color: Colors.white)),
         onPressed: onNewTheme,
@@ -62,9 +58,7 @@ class NewThemePanel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Flexible(
-                  child: ColorSelector('Primary swatch', newThemePrimary,
-                      (color) => onSwatchSelection(swatchFor(color: color)))),
+              Flexible(child: ColorSelector('Primary swatch', newThemePrimary, (color) => onSwatchSelection(swatchFor(color: color)))),
               SizedBox(width: 10),
               BrightnessSelector(
                 isDark: isDark,
@@ -72,8 +66,7 @@ class NewThemePanel extends StatelessWidget {
                 onBrightnessChanged: onBrightnessSelection,
               ),
             ]
-              ..insert(
-                  0, !inPortrait && !isLargeLayout ? newThemeLabel : SizedBox())
+              ..insert(0, !inPortrait && !isLargeLayout ? newThemeLabel : SizedBox())
               ..add(!inPortrait && !isLargeLayout ? btCreate : SizedBox()),
           ),
           isLargeLayout || inPortrait ? btCreate : SizedBox()

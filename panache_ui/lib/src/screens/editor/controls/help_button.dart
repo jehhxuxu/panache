@@ -19,14 +19,16 @@ class HelpButton extends StatelessWidget {
     );
   }
 
-  showHelp(BuildContext context, {String content, String title}) {
+  void showHelp(BuildContext context, {String content, String title}) {
     final textTheme = Theme.of(context).textTheme;
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(title),
         contentPadding: const EdgeInsets.all(24),
-        children: [Text(content, style: textTheme.subtitle1)],
+        children: [
+          Text(content, style: textTheme.subtitle1)
+        ],
       ),
     );
   }

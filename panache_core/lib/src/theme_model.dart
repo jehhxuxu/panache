@@ -17,8 +17,7 @@ typedef Future<Uint8List> ScreenShooter();
 class ThemeModel extends Model {
   get dirPath => _service.dir.path;
 
-  static ThemeModel of(BuildContext context) =>
-      ScopedModel.of<ThemeModel>(context);
+  static ThemeModel of(BuildContext context) => ScopedModel.of<ThemeModel>(context);
 
   //final CloudService _cloudService;
 
@@ -104,6 +103,9 @@ class ThemeModel extends Model {
   }
 
   void updateColor({String property, Color color}) {
+    print(color);
+    print(property);
+
     final args = <Symbol, dynamic>{};
     args[Symbol(property)] = color;
     final updatedTheme = Function.apply(theme.copyWith, null, args);
@@ -151,16 +153,13 @@ class ThemeModel extends Model {
     notifyListeners();
   }
 
-  String themeDataPath(PanacheTheme theme) =>
-      '${_service.dir?.path ?? ''}/themes/${theme.id}.json';
+  String themeDataPath(PanacheTheme theme) => '${_service.dir?.path ?? ''}/themes/${theme.id}.json';
 
   bool themeExists(PanacheTheme theme) {
     return _service.themeExists(themeDataPath(theme));
   }
 
-  void saveEditorState(Map<String, bool> panelStates, double pixels) =>
-      localData.saveEditorState(panelStates, pixels);
+  void saveEditorState(Map<String, bool> panelStates, double pixels) => localData.saveEditorState(panelStates, pixels);
 
-  void saveScrollPosition(double pixels) =>
-      localData.saveScrollPosition(pixels);
+  void saveScrollPosition(double pixels) => localData.saveScrollPosition(pixels);
 }

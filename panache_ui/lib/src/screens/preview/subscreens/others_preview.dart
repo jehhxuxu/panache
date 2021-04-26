@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../editor/editor_utils.dart';
+import '../../../widgets/fields_row.dart';
 
 class OthersPreview extends StatelessWidget {
   final ThemeData theme;
@@ -29,17 +28,13 @@ class OthersPreview extends StatelessWidget {
                         Text('Circle Avatar')
                       ],
                     ),
-                    getFieldsRow([
-                      FlatButton.icon(
+                    FieldsRow([
+                      TextButton.icon(
                         icon: Icon(Icons.event),
                         label: Text('Datepicker'),
-                        onPressed: () => showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100)),
+                        onPressed: () => showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1900), lastDate: DateTime(2100)),
                       ),
-                      FlatButton.icon(
+                      TextButton.icon(
                         icon: Icon(Icons.open_in_browser),
                         label: Text('Dialog'),
                         onPressed: () => _showDialog(context),
@@ -73,14 +68,14 @@ class OthersPreview extends StatelessWidget {
 
   void _showDialog(context) => showDialog(
         context: context,
-        builder: (BuildContext context) => Theme(
+        builder: (context) => Theme(
             child: Dialog(
               child: Container(
                 width: 420.0,
                 height: 420.0,
                 child: Text(
                   'a simple dialog',
-                  style: theme.textTheme.headline,
+                  style: theme.textTheme.headline5,
                 ),
               ),
             ),
